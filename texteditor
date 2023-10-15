@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Text Editor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #e6f7ff; /* Light blue background */
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        /* Expand the text area to full width */
+        .editor {
+            width: 100%;
+            min-height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        /* Adjust button group alignment */
+        .btn-group {
+            display: flex;
+            justify-content: space-between; /* Align buttons in a single line */
+            flex-wrap: wrap;
+        }
+        /* Adjust button size for smaller buttons */
+        .btn-group .btn {
+            padding: 5px 10px; /* Adjust padding for smaller buttons */
+            font-size: 14px; /* Reduce font size */
+        }
+        /* Style the usage instructions */
+        .usage-instructions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <span class="navbar-brand">Custom Text Editor</span>
+    </nav>
+    <div class="container mt-4">
+        <div class="btn-group mb-2">
+            <button class="btn btn-secondary" id="boldButton"><i class="fas fa-bold"></i></button>
+            <button class="btn btn-secondary" id="italicButton"><i class="fas fa-italic"></i></button>
+            <button class="btn btn-secondary" id="underlineButton"><i class="fas fa-underline"></i></button>
+            <button class="btn btn-secondary" id="clearButton"><i class="fas fa-eraser"></i></button>
+            <button class="btn btn-secondary" id="increaseFontSizeButton"><i class="fas fa-plus"></i></button>
+            <button class="btn btn-secondary" id="decreaseFontSizeButton"><i class="fas fa-minus"></i></button>
+        </div>
+        <div class="editor" contenteditable="true"></div>
+        
+        <!-- Usage Instructions -->
+        <div class="usage-instructions">
+            <h5>Usage Instructions:</h5>
+            <ul>
+                <li>Click the <strong>Bold</strong> button to make text bold.</li>
+                <li>Click the <em>Italic</em> button to make text italic.</li>
+                <li>Click the <u>Underline</u> button to underline text.</li>
+                <li>Click the <i class="fas fa-eraser"></i> button to clear selected text.</li>
+                <li>Use <i class="fas fa-plus"></i> and <i class="fas fa-minus"></i> buttons to adjust font size.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcom/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function executeCommand(command, value = null) {
+                document.execCommand(command, false, value);
+            }
+
+            let fontSize = 3; // Initialize with a default font size.
+
+            // Button Click Event Handlers
+            $('#boldButton').click(function () {
+                executeCommand('bold');
+            });
+
+            $('#italicButton').click(function () {
+                executeCommand('italic');
+            });
+
+            $('#underlineButton').click(function () {
+                executeCommand('underline');
+            });
+
+            $('#clearButton').click(function () {
+                executeCommand('delete'); // Use 'delete' command to remove selected text.
+            });
+
+            $('#increaseFontSizeButton').click(function () {
+                fontSize++;
+                executeCommand('fontSize', fontSize); // Increase font size.
+            });
+
+            $('#decreaseFontSizeButton').click(function () {
+                fontSize--;
+                executeCommand('fontSize', fontSize); // Decrease font size.
+            });
+        });
+    </script>
+</body>
+</html>
